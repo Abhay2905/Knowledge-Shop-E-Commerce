@@ -1,0 +1,416 @@
+{% extends "base.html" %}
+
+{% block title %}Knowledge Shop
+{% endblock title %}
+
+{% block content %}
+<main>
+
+    <!-- 
+      - custom css link
+    -->
+    <link rel="stylesheet" href="/static/css/home.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+     <!-- 
+    - google font link
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet">
+     <!-- 
+          - #HERO
+        -->
+      
+  </div>
+  
+        <section class="section hero" id="home" aria-label="home">
+          <div class="container">
+  
+            <div class="hero-content">
+  
+              <p class="section-subtitle">Let's Make The Best Investment</p>
+  
+              <h1 class="h1 hero-title">Read More And Make Success The Result Of Perfection.</h1>
+  
+              <p class="section-text">
+                Welcome to Knowledge Shop, where your reading journey begins. Dive into a world of captivating stories, enlightening fiction, 
+                and timeless classics. Whether you're a seasoned reader or just beginning your adventure, we have something special waiting for you.
+              </p>
+  
+            </div>
+  
+            <div class="hero-banner has-before">
+              <img src="/static/img/Girl Book.png" width="431" height="596"
+                alt="things i never said, a novel by claudia wilson" class="w-100">
+  
+              <!-- <button class="play-btn" aria-label="play video">
+                <ion-icon name="play-outline" aria-hidden="true"></ion-icon>
+              </button> -->
+            </div>
+  
+          </div>
+         
+        </section>
+        <hr class="mb">
+        <br>
+        <br>
+  
+         <!-- 
+          - #FEATURE
+        -->
+  
+        <section class="section-feature" aria-label="feature">
+          <div class="container4">
+            <div class="grid-list">
+  
+              <li>
+                <div class="feature-card">
+  
+                  <div class="card-icon">
+                    <img class="feature-img" src="/static/img/feature-1.png"  loading="lazy" alt="feature icon"
+                      class="w-100">
+                  </div>
+  
+                  <div>
+                    <h3 class="h3 card-title">Free Shipping</h3>
+  
+                    <p class="card-text">Order over 500</p>
+                  </div>
+  
+                </div>
+              </li>
+  
+              <li>
+                <div class="feature-card">
+  
+                  <div class="card-icon">
+                    <img class="feature-img" src="/static/img/feature-2.png" width="100" height="100" loading="lazy" alt="feature icon"
+                      class="w-100">
+                  </div>
+  
+                  <div>
+                    <h3 class="h3 card-title">Secure Payment</h3>
+  
+                    <p class="card-text">100% Secure Payment</p>
+                  </div>
+  
+                </div>
+              </li>
+  
+              <li>
+                <div class="feature-card">
+  
+                  <div class="card-icon">
+                    <img class="feature-img" src="/static/img/feature-3.png" width="100" height="100" loading="lazy" alt="feature icon"
+                      class="w-100">
+                  </div>
+  
+                  <div>
+                    <h3 class="h3 card-title">Best Price</h3>
+  
+                    <p class="card-text">Guaranteed Low Cost</p>
+                  </div>
+  
+                </div>
+              </li>
+  
+              <li>
+                <div class="feature-card">
+  
+                  <div class="card-icon">
+                    <img class="feature-img" src="/static/img/feature-4.png" width="100" height="100" loading="lazy" alt="feature icon"
+                      class="w-100">
+                  </div>
+  
+                  <div>
+                    <h3 class="h3 card-title">Easy Return</h3>
+  
+                    <p class="card-text">Within 30 Days returns</p>
+                  </div>
+  
+                </div>
+              </li>
+  
+            </div>
+  
+          </div>
+        </section>
+        <hr class="mb">
+  
+  
+        <section class="recommendataion">
+          <span id="heading">RECOMMENDATION</span>
+          <div id="slider">  
+            <div class="slides">  
+              <img  src="/static/img/83_inr.jpg" alt="1" width="100%" />
+            </div>
+      
+            <div class="slides">  
+              <img src="/static/img/78_inr.jpg" alt="2" width="100%" />
+            </div>
+      
+            <div class="slides">  
+              <img src="/static/img/77_inr.jpg" alt="3" width="100%" />
+            </div> 
+      
+            <div class="slides">  
+              <img src="/static/img/79_inr.jpg" alt="4" width="100%" />
+            </div> 
+      
+            <div class="slides">  
+              <img src="/static/img/80_inr.jpg" alt="5" width="100%" />
+            </div>
+      
+            <div id="dot"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            </div>
+        </section>
+        <hr class="mb">
+  
+  {% comment %} ------------------------------------------- book on sale----------------------------------------------------- {% endcomment %}
+ 
+        <section class="book-sale">
+          <div class="heading">
+            Books On Sale
+             
+          </div>
+          <div class="book-container">
+            <div class="wrapper">
+              <ul class="carousel">
+                {% for twoproduct in twoproducts %}
+                <li class="card">
+                  <div class="img">
+                    <img class="card-img-top" href="" src="{{ twoproduct.image.url }}" alt="" />
+                    <span class="badge">SALE</span>
+                  </div>
+                  <h5 >{{twoproduct.name}}</h5>
+                  <div class="genre">
+                    <span>{{twoproduct.category}}</span>
+                  </div>
+                  <div class="footer">
+                    <div class="price">
+                      <span>₹{{twoproduct.sale_price}}</span>
+                      <span><strike>₹{{twoproduct.price}}</strike></span>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center">
+                          <a class="btn-a btn mt-auto" href="{% url 'twoproduct' twoproduct.id  %}">View Product</a>
+                      </div>
+                      </div>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            
+          </div>
+        </section>
+  
+        <hr class="mb">
+  
+  {% comment %} ------------------------------------------- BEST SELLER----------------------------------------------------- {% endcomment %}
+        <section class="book-sale">
+          <div class="heading">
+            Best Seller       
+          </div>
+
+          {% comment %} <div class="book-container">
+            <div class="wrapper">
+              <ul class="carousel">
+                {% for fourproduct in fourproducts %}
+                <li class="card">
+                  <div class="img">
+                    <img class="card-img-top" href="" src="{{ fourproduct.image.url }}" alt="" />
+                    <span class="badge">50%</span>
+                  </div>
+                  <h5 >{{fourproduct.name}}</h5>
+                  <div class="genre">
+                    <span>{{fourproduct.category}}</span>
+                  </div>
+                  <div class="footer">
+                    <div class="price">
+                      <span>{{fourproduct.sale_price}}</span>
+                      <span><strike>{{fourproduct.price}}</strike></span>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center">
+                          <a class="btn-a btn btn-outline-dark mt-auto" href="{% url 'fourproduct' fourproduct.id  %}">View Product</a>
+                      </div>
+                      </div>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div> {% endcomment %}
+
+
+        <div class="book-container">
+            <div class="wrapper">
+              <ul class="carousel">
+                
+                <li class="card">
+                  <div class="img">
+                    <img src="/static/img/Einstein.jpg" alt="" />
+                    <span class="badge">10%</span>
+                  </div>
+                  <h5>Einstein : HIS LIFE AND UNIVERSE</h5>
+                  <div class="genre">
+                    <span>BIOGRAPHY </span>
+                  </div>
+                  <div class="footer">
+                    <div class="price">
+                      <span>₹458</span>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center">
+                          <a class="btn-a btn btn-outline-dark mt-auto" href="/bestseller">View Product</a>
+                      </div>
+                      </div>
+                  </div>
+                </li>
+                <li class="card">
+                  <div class="img">
+                    <img src="/static/img/the wright brother.jpg" alt="" />
+                    <span class="badge">10%</span>
+                  </div>
+                  <h5>The Wright Brothers</h5>
+                  <br>
+                  <div class="genre">
+                    <span>BIOGRAPHY</span>
+                  </div>
+                  <div class="footer">
+                    <div class="price">
+                      <span>₹423</span>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center">
+                          <a class="btn-a btn btn-outline-dark mt-auto" href="/bestseller">View Product</a>
+                      </div>
+                      </div>
+                  </div>
+                </li>
+                <li class="card">
+                  <div class="img">
+                    <img src="/static/img/indian art& culture.jpg" alt="" />
+                    <span class="badge">10%</span>
+                  </div>
+                  <h5>Indian Art And Culture</h5>
+                  <div class="genre">
+                    <span>UPSC</span>
+                  </div>
+                  <div class="footer">
+                    <div class="price">
+                      <span>₹684</span>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center">
+                          <a class="btn-a btn btn-outline-dark mt-auto" href="/bestseller">View Product</a>
+                      </div>
+                      </div>
+                  </div>
+                </li>
+                <li class="card">
+                  <div class="img">
+                    <img src="/static/img/you can.jpg" alt="" />
+                    <span class="badge">10%</span>
+                  </div>
+                  <h5>You Can</h5>
+                  <br>
+                  <div class="genre">
+                    <span>GENERAL</span>
+                  </div>
+                  <div class="footer">
+                    <div class="price">
+                      <span>₹129</span>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center">
+                          <a class="btn-a btn btn-outline-dark mt-auto" href="/bestseller">View Product</a>
+                      </div>
+                      </div>
+                  </div>
+                </li>
+                <li class="card">
+                  <div class="img">
+                    <img src="/static/img/a one man called ove.jpg" alt="" />
+                    <span class="badge">10%</span>
+                  </div>
+                  <h5>A Man Called Ove</h5>
+                  <br>
+                  <div class="genre">
+                    <span>GENERAL</span>
+                  </div>
+                  <div class="footer">
+                    <div class="price">
+                      <span>₹213</span>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center">
+                          <a class="btn-a btn btn-outline-dark mt-auto" href="/bestseller">View Product</a>
+                      </div>
+                      </div>
+                  </div>
+                </li>
+                <li class="card">
+                  <div class="img">
+                    <img src="/static/img/The Power of Your Subconscious Mind.jpg" alt="" />
+                    <span class="badge">10%</span>
+                  </div>
+                  <h5>The Power of Your Subconscious Mind</h5>
+                  <div class="genre">
+                    <span>GENERAL</span>
+                  </div>
+                  <div class="footer">
+                    <div class="price">
+                      <span>₹149</span>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center">
+                          <a class="btn-a btn btn-outline-dark mt-auto" href="/bestseller">View Product</a>
+                      </div>
+                      </div>
+                  </div>
+                </li>
+                {% comment %} <li class="card">
+                  <div class="img">
+                    <img src="/static/img/Field Marshal Sam Manekshaw The Man and His Times.jpg" alt="" />
+                    <span class="badge">10%</span>
+                  </div>
+                  <h5>Field Marshal Sam Manekshaw The Man and His Times</h5>
+                  <div class="genre">
+                    <span>BIOGRAPHY</span>
+                  </div>
+                  <div class="footer">
+                    <div class="price">
+                      <span>₹1049</span>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center">
+                          <a class="btn-a btn btn-outline-dark mt-auto" href="/bestseller">View Product</a>
+                      </div>
+                      </div>
+                  </div>
+                </li> {% endcomment %}
+                
+              </ul>
+            </div>
+          </div>
+        </section>
+
+    
+  
+        
+  
+          
+  
+        <!-- 
+         - custom js link
+        -->
+        <script src="/static/js/home.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  
+  </main>
+  
+{% endblock %}

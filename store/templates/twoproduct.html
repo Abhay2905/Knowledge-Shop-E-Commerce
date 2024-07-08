@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% block content %}
+<link href="/static/css/product.css" rel="stylesheet" />
+
+
+<section class="section-p">
+  <div class="container-p">
+    <br/>
+    
+    
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{ twoproduct.image.url }}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <center>
+              <h5 class="card-title">{{ twoproduct.name }}</h5>
+              <br/>
+              <p class="card-text justified">{{ twoproduct.description }}</p>
+              <br>
+            
+              {% if twoproduct.is_sale %}
+              <div class="d-flex mb-2">
+                <div class="bi-star-fill"></div>
+                &nbsp;&nbsp;Sale!&nbsp;&nbsp;
+                <div class="bi-star-fill"></div>
+              </div>
+    
+              <!-- Product price-->
+                <div class="cart-price">
+                  <strike>
+                    <h3>₹{{ twoproduct.price }}</h3>
+                  </strike>
+                  &nbsp;
+                    <h2>₹{{ twoproduct.sale_price }}</h2>
+                </div>  
+                {% else %}
+                  <div class="cart-price">
+                    <h3>₹{{ twoproductprice }}</h3>
+                  </div>    
+                {% endif %}
+                <br/><br/>
+                <div class="row justify-content-center">
+                  <div class="col-md-2">Quantity:</div>
+                  <div class="col-md-2">
+                    <select class="form-select form-select-sm" id="qty-cart">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </div>
+                </div>
+                <br/><br/>
+                <div class="pro-btn">
+                  <button type="button" value="{{ twoproduct.id }}" class="btn btn-home btn-secondary" id="add-cart-two">
+                    <i class="fa-solid fa-cart-shopping" alt="" width="20px" height="20px"></i>Add To Cart
+                  </button>
+                  <br>
+                  <a href="{% url 'home'%}" class="btn btn-home btn-secondary">Home</a>         
+                </div>                   
+            </center>
+          </div>
+        </div>
+      </div>
+      <div class="detail-customer">
+        <div class="book-detail tabcontent" id="detail">
+          <div class="detail-line">
+            <strong>Book Title</strong><span>{{twoproduct.name}}</span>
+          </div>
+          <div class="detail-line">
+            <strong>Author</strong><span>{{twoproduct.author}}</span>
+          </div>
+          <div class="detail-line">
+            <strong>ISBN-13</strong><span>{{twoproduct.isbn}}</span>
+          </div>
+          <div class="detail-line">
+            <strong>Edition Language</strong><span>{{twoproduct.edition_language}}</span>
+          </div>
+          <div class="detail-line">
+            <strong>Book Format</strong><span>{{twoproduct.book_formate}}</span>
+          </div>
+          <div class="detail-line tag-line">
+            <strong>Tags</strong>
+            <div class="tags">
+              <span>{{twoproduct.category}}</span>
+            </div>
+          </div> 
+        </div>
+      </div>
+      <section class="service">
+        <div class="service-container">
+          <div class="service-card">
+            <div class="icon">
+              <i class="fa-solid fa-bolt-lightning"></i>
+            </div>
+            <div class="service-content">
+              <h5>Quick Delivery</h5>
+              <p>
+                On time delivery,
+                At your place
+              </p>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="icon">
+              <i class="fa-solid fa-shield"></i>
+            </div>
+            <div class="service-content">
+              <h5>Secure Payment</h5>
+              <p>
+                100% Secure Payment
+              </p>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="icon">
+              <i class="fa-solid fa-thumbs-up"></i>
+            </div>
+            <div class="service-content">
+              <h5>Best Quality</h5>
+              <p>
+                Best Quality at Guaranteed Low Cost
+              </p>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="icon">
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <div class="service-content">
+              <h5>Return Guarantee</h5>
+              <p>
+                Within 30 Days returns
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>   
+  </div>
+</section>  
+
+<script>
+// Check if button pressed
+$(document).on('click', '#add-cart-two', function(e){
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '{% url 'cart_add_two' %}',
+        data: {
+          twoproduct_id: $('#add-cart-two').val(),
+          twoproduct_qty: $('#qty-cart option:selected').text(),
+    csrfmiddlewaretoken: '{{ csrf_token }}',
+    action: 'post'
+        },
+
+        success: function(json){
+            //console.log(json)
+            document.getElementById("cart_quantity").textContent = json.qty
+            location.reload();
+        },
+
+        error: function(xhr, errmsg, err){
+
+        }
+
+
+    });
+
+
+
+})
+</script>
+
+
+{% endblock %}
