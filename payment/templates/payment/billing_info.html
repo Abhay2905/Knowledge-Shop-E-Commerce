@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<!-- 
+ - google font link
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Poppins:wght@400;500;600&display=swap"
+  rel="stylesheet">
+
+<link href="/static/css/checkout.css" rel="stylesheet" />
+
+<!-- Header-->
+
+<div class="container-billing_info">
+  <header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+      <div class="text-center text-white">
+        <h1 class="display-4 fw-bolder">Order Info</h1>
+        <p class="lead fw-normal text-white-50 mb-0">Choose Your Payment Type...</p>
+      </div>
+    </div>
+  </header>
+  <br />
+  <div class="row">
+    <div class="card-3">
+      <div class="card">
+        <div class="card-header">
+          Order Summary
+        </div>
+        <div class="card-body">
+          {% for product in cart_products %}
+          {{ product.name }}:
+          {% if product.is_sale %}
+          ₹{{ product.sale_price }}
+          {% else %}
+          ₹{{ product.price }}
+          {% endif %}
+
+          <br />
+          <small>Quantity:
+            {% for key, value in quantities.items %}
+            {% if key == product.id|slugify %}
+            {{ value }}
+            {% endif %}
+            {% endfor %}</small>
+          <br /><br />
+
+          {% endfor %}
+          Total: ₹{{ totals }}
+          <br /><br />
+          <a href="{% url 'cart_summary' %}" class="btn btn-sm btn-outline-secondary">Update Items</a>
+        </div>
+      </div>
+      <br /><br />
+      <div class="card">
+        <div class="card-header">
+          Shipping Info
+        </div>
+        <div class="card-body">
+
+          Name: {{ shipping_info.shipping_full_name }}<br />
+          Email: {{ shipping_info.shipping_email }}<br />
+          Address 1: {{ shipping_info.shipping_address1 }}<br />
+          Address 2: {{ shipping_info.shipping_address2 }}<br />
+          City: {{ shipping_info.shipping_city }}<br />
+          State: {{ shipping_info.shipping_state }}<br />
+          Pincode: {{ shipping_info.shipping_pincode }}<br />
+          Country: {{ shipping_info.shipping_country }}<br />
+          <br />
+          <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">Update Shipping</a>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 offset-md-4 ">
+      
+      <br /><br />
+
+      <div class="card-b">
+        <div class="card-header">
+          Payment Option
+        </div>
+        <div class="card-body">
+          <form method="POST" action="{% url 'process_order' %}">
+            
+            {% csrf_token %}
+            <div class="container">
+              <div class="plans">
+                <div class="title">Choose a Payment Option</div>
+                <label class="plan basic-plan" for="basic">
+                  <input checked type="radio" name="plan" id="basic" />
+                  <div class="plan-content">
+                    <img loading="lazy" src="/static/img/cod.png" alt="" />
+                    <br>
+                    <div class="plan-details">
+                      <span>Cash On Deliver</span>
+
+                    </div>
+                  </div>
+                </label>
+            
+                <label class="plan complete-plan" for="complete">
+                  <input type="radio" id="complete" name="plan" value="{% url 'cart_summary' %}" />
+                  <div class="plan-content">
+                    <img loading="lazy" src="/static/img/credit-card.png" alt="" />
+                    <div class="plan-details">
+                      <span>Online</span>
+                      {% comment %} <button><a href="/payment_success">Online</a></button> {% endcomment %}
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+            {% comment %} {{ billing_form.as_p }}
+            {% endcomment %}
+            
+          
+        </div>
+      </div>
+      <br/>
+      
+      
+      
+      <button type="submit" class="btn btn-secondary">
+        Order Now
+      </button>
+      </form>
+      
+
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
