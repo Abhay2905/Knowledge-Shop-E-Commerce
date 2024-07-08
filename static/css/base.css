@@ -1,0 +1,126 @@
+footer{
+  margin-top: 0rem;
+  padding: 0px 30px;
+  background-color: var(--light-gray);
+}
+footer .container{
+  display: flex;
+  justify-content: space-around;
+  padding-top: 20px;
+}
+footer .container .logo-description{
+  width: 30%;
+}
+footer .container .our-store{
+  width: 20%;
+}
+footer .container .logo-description .logo{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+footer .logo-description .logo img{
+  width: 50px;
+  border-radius: 5px;
+}
+footer .logo-description .logo h4{
+  color: #131428;
+  margin-bottom: -5px;
+}
+footer .logo-description .logo small{
+  font-size: 10px;
+  color: #a0a1a6;
+}
+footer .logo-description .logo-body p{
+  font-size: 12px;
+  color: #444545;
+}
+footer .logo-description .social-links h4{
+  font-size: 15px;
+  margin-top: 1rem;
+}
+footer .logo-description .social-links .links{
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.3rem;
+}
+footer .logo-description .social-links .links li{
+  list-style: none;
+}
+footer .logo-description .social-links .links li a{
+  text-decoration: none;
+}
+footer .logo-description .social-links .links i{
+  padding: 5px 8px;
+  border-radius: 5px;
+}
+footer .logo-description .social-links .links li .fa-facebook-f{
+  color: #0165E1;
+}
+footer .logo-description .social-links .links li .fa-facebook-f:hover{
+  background-color: #b0cef3;
+}
+footer .logo-description .social-links .links li .fa-youtube{
+  color: #FF0000;
+}
+footer .logo-description .social-links .links li .fa-youtube:hover{
+  background-color: #f5c6c6;
+}
+footer .logo-description .social-links .links li .fa-twitter{
+  color: #1DA1F2;
+}
+footer .logo-description .social-links .links li .fa-twitter:hover{
+  background-color: #c8e6f8;
+}
+footer .logo-description .social-links .links li .fa-linkedin{
+  color: #0A66C2;
+}
+footer .logo-description .social-links .links li .fa-linkedin:hover{
+  background-color: #b1d1f1;
+}
+footer .logo-description .social-links .links li .fa-instagram{
+  color: #E1306C;
+}
+footer .logo-description .social-links .links li .fa-instagram:hover{
+  background-color: #f4ccda;
+}
+footer .container .list h4{
+  font-size: 14px;
+  font-weight: 700;
+  color: #131428;
+}
+footer .container .list ul{
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+footer .container .list ul li{
+  list-style:  none;
+}
+footer .container .list ul li a{
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  color: #444545;
+}
+footer .container .our-store li i{
+  color: #6c5dd4;
+  font-size: 15px;
+  margin-right: 0.5rem;
+}
+footer .container .list a:hover{
+  color: #6c5dd4;
+}
+.footer-bottom { 
+  padding-top: 20px;
+  padding-left: 30%; 
+  padding-right: 30%;
+}
+footer .container .logo-description .logo .title{
+    display: flex;
+    align-content: space-around;
+    flex-direction: column;
+}
