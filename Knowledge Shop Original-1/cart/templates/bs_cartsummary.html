@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+ <!-- 
+ - google font link
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+ href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Poppins:wght@400;500;600&display=swap"
+ rel="stylesheet">
+<link href="/static/css/cartsummary.css" rel="stylesheet" />
+
+<section class="container-c">
+  <!-- Header-->
+  <header class="bg-dark">
+    <div class="text-center text-white">
+      <h1 class="display-4">Shopping Cart</h1>
+      <p class="lead">View Your Cart...</p>
+    </div>
+  </header>
+  <br/>
+  <div class="container">
+    {% if cart_products_bs %}
+      {% for bsproduct in cart_products_bs %}
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{ bsproduct.image.url }}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+            <center>
+              <h5 class="card-title">{{ bsproduct.name }}</h5>
+              <br/>
+              <p class="card-text justified">{{ bsproduct.description }}</p>
+              
+              {% if bsproduct.is_sale %}
+              <div class="d-flex justify-content-center small text-warning mb-2">
+                <div class="bi-star-fill"></div>
+                  &nbsp;&nbsp;Sale!&nbsp;&nbsp;
+                    <div class="bi-star-fill"></div>
+                </div>
+                <!-- Product price-->
+                <strike>
+                  ₹{{ bsproduct.price }}
+                </strike>
+                &nbsp;
+                ₹{{ bsproduct.sale_price }}
+
+              {% else %}
+                ₹{{ bsproduct.price }}
+                  
+              {% endif %}
+              <br/><br/>
+              <div class="row justify-content-center">
+              <div class="col-md-2">Quantity:</div>
+                <div class="col-md-3">
+                  <select class="form-select form-select-sm" id="select{{bsproduct.id}}">
+                        
+                  {% for key, value in quantities.items %}
+                      {% if key == bsproduct.id|slugify %}
+                  <option selected>{{ value }}</option>
+                      {% endif %}
+                  {% endfor %}
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                  </select>
+                </div>
+              </div>
+              <br/><br/>
+              <div class="crt-btn">
+                <a href="{% url 'home'%}" class="btn btn-home btn-secondary">Home</a>
+                <br>
+                <button type="button" data-index="{{bsproduct.id}}" class="btn btn-udt btn-secondary update-cart-bs">Update</button>
+                <br>               
+                  <button type="button" data-index="{{bsproduct.id}}" class="btn btn-rmv btn-secondary btn-danger delete-product-bs">Remove</button>             
+              </div>                           
+            </center>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {% endfor %}
+        <div align="right" class="right">
+        <h3>Total: ₹{{ totals_bs }}</h3>
+        <br>
+        <div class="btn-c">
+          <a href="{% url 'checkout' %}" class=" btn-success">Checkout</a>
+        </div>
+        </div>
+        <br/><br/><br/>
+      {% else %}
+      There's Nothing In Your Cart...
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    {% endif %}
+  </div>
+
+</section>
+
+
+
+<script>
+// Update Cart
+$(document).on('click', '.update-cart-bs', function(e){
+    e.preventDefault();
+    // grab the product id
+    var bsproductid = $(this).data('index');
+
+    $.ajax({
+    type: 'POST',
+    url: '{% url 'cart_update_bs' %}',
+    data: {
+        bsproduct_id: $(this).data('index'),
+        bsproduct_qty: $('#select' + bsproductid + ' option:selected').text(),
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+      action: 'post'
+    },
+    success: function(json){
+        //console.log(json)
+        //document.getElementById("cart_quantity").textContent = json.qty
+        location.reload();
+    },
+
+    error: function(xhr, errmsg, err){
+
+    }
+
+
+    });
+
+})
+
+// Delete Item From Cart
+$(document).on('click', '.delete-product-bs', function(e){
+    e.preventDefault();
+    // grab the product id
+    //var productid = $(this).data('index');
+
+    $.ajax({
+    type: 'POST',
+    url: '{% url 'cart_delete_bs' %}',
+    data: {
+      bsproduct_id: $(this).data('index'),
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+      action: 'post'
+    },
+    success: function(json){
+        //console.log(json)
+        //document.getElementById("cart_quantity").textContent = json.qty
+        location.reload();
+    },
+
+    error: function(xhr, errmsg, err){
+
+    }
+
+
+    });
+
+})
+
+
+
+
+</script>
+
+
+{% endblock %} 
+
