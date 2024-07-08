@@ -1,0 +1,105 @@
+<!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="/static/css/style.css">
+
+  <!-- 
+ - google font link
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+ href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Poppins:wght@400;500;600&display=swap"
+ rel="stylesheet">
+
+
+<!--  Link for social Icons -->
+ <link
+   rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+ />
+
+
+
+
+
+  <!-- 
+    - #HEADER
+  -->
+
+  <header class="header" data-header>
+    <div class="container">
+
+      <a href="/" class="logo">Knowledge Shop</a>
+
+      <nav class="navbar" data-navbar>
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <a href="/" class="navbar-link" data-nav-link>Home</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="/book" class="navbar-link" data-nav-link>Books</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="/bestseller" class="navbar-link" data-nav-link>Best Seller</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="/todaydeal" class="navbar-link" data-nav-link>Today's Deal</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="/about" class="navbar-link" data-nav-link>About</a>
+          </li>
+          <li >
+            <div class="dropdown">
+              <a  class="dropbtn" id="navbarDropdown" data-bs-toggle="dropdown" href="#">Profile</a>
+              <div class="dropdown-content">
+                <a href="{% url 'update_user' %}">User Profile</a>
+                <hr class="dropdown-divider" />
+                <a href="{% url 'update_info'  %}">User Ship Info</a>
+                <hr class="dropdown-divider" />
+                <a href="{% url 'order'  %}">Order</a>
+              </div>
+            </div>
+          </li>
+          <li class="navbar-item">
+            <a href="{% url 'cart_summary' %}" class="btn-outline">
+            {% comment %} <a href="{% url 'cart_summary_bs' %}" class="btn-outline"> {% endcomment %}
+              <img src="/static/img/cart.png" alt="" width="40px" height="40px">
+              <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart_quantity">{{ cart|length }}
+            </a>
+          </li>
+          
+          {% if user.is_authenticated%}
+            <button class="login"><a href="/logout">Log out</a></button>
+          {% else %}
+            <button class="login"><a href="/login">Log In</a></button>
+            <button class="login"><a href="/register">Sign up</a></button>
+          {% endif %}
+          
+        </ul>
+      </nav>
+      <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
+        <ion-icon name="menu-outline" aria-hidden="true" class="open"></ion-icon>
+
+        <ion-icon name="close-outline" aria-hidden="true" class="close"></ion-icon>
+      </button>
+
+
+    </div>
+     <!-- 
+       - custom js link
+      -->
+      <script src="/static/js/scripts.js" defer></script>
+        <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+   
+  </header>
